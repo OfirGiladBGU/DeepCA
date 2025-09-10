@@ -27,8 +27,7 @@ LEARNING_RATE = 1e-4
 # MAX_EPOCHS = 200
 MAX_EPOCHS = 20
 
-# BATCH_SIZE = 3
-BATCH_SIZE = 4
+BATCH_SIZE = 3
 
 # Summary writer
 run_folder = ab_path + 'runs/{date:%m_%d_%H:%M}'.format(date=datetime.datetime.now())
