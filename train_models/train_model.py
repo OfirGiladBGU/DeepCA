@@ -24,9 +24,11 @@ ab_path = os.getcwd() + '/DeepCA/'
 ab_path_data = os.getcwd() + '/datasets/'
 
 LEARNING_RATE = 1e-4
-MAX_EPOCHS = 200
+# MAX_EPOCHS = 200
+MAX_EPOCHS = 20
 
-BATCH_SIZE = 3
+# BATCH_SIZE = 3
+BATCH_SIZE = 4
 
 # Summary writer
 run_folder = ab_path + 'runs/{date:%m_%d_%H:%M}'.format(date=datetime.datetime.now())
@@ -158,6 +160,7 @@ def main():
         Wasserstein_Ds_cur= []
 
         for i, data in enumerate(trainloader, 0):
+            print('Epoch {}/{}  Sample {}/{}'.format(epoch+1, MAX_EPOCHS, i+1, len(trainloader)))
             torch.cuda.empty_cache()
 
             # get the inputs; data is a list of [inputs, labels]
@@ -258,6 +261,7 @@ def main():
 
         if (epoch + 1) % 1 == 0:
             model.eval()
+            os.makedirs(ab_path + 'outputs_results/checkpoints/', exist_ok=True)
             torch.save(
                     {
                         "network": model.state_dict(),
