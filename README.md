@@ -48,7 +48,8 @@ python: 3.9.18
 pytorch: 2.1.1
 numpy: 1.23.5 
 nibabel: 3.2.2
-tigre 
+tensorboard
+pytigre 
 ```
 
 # 4. Code Instructions

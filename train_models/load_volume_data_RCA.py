@@ -53,8 +53,6 @@ class Dataset(torch.utils.data.Dataset):
         numpy_3d_data1 = numpy_3d_data1.astype(np.float32)
 
         numpy_3d_data1 = torch.Tensor(numpy_3d_data1)
-        if self.transform3d is not None:
-            numpy_3d_data1 = self.transform3d(numpy_3d_data1)
         numpy_3d_data1 = numpy_3d_data1.unsqueeze(0)
 
         # 1 3D input + 1 3D target
@@ -63,8 +61,6 @@ class Dataset(torch.utils.data.Dataset):
         numpy_3d_data2 = numpy_3d_data2.astype(np.float32)
 
         numpy_3d_data2 = torch.Tensor(numpy_3d_data2)
-        if self.transform3d is not None:
-            numpy_3d_data2 = self.transform3d(numpy_3d_data2)
         numpy_3d_data2 = numpy_3d_data2.unsqueeze(0)
 
         return numpy_3d_data1, numpy_3d_data2
