@@ -30,7 +30,7 @@ ab_path = os.getcwd() + '/datasets/'
   
 
 class Dataset(torch.utils.data.Dataset):
-    def __init__(self, list_IDs=None):
+    def __init__(self, list_IDs):
         self.list_IDs = list_IDs
         self.data_paths = [ab_path + 'CCTA_BP', ab_path + 'CCTA_GT']
 
@@ -51,16 +51,12 @@ class Dataset(torch.utils.data.Dataset):
         data_file1 = str(self.data_files1[index])
         numpy_3d_data1 = np.load(str(data_file1))
         numpy_3d_data1 = numpy_3d_data1.astype(np.float32)
-
-        numpy_3d_data1 = torch.Tensor(numpy_3d_data1)
-        numpy_3d_data1 = numpy_3d_data1.unsqueeze(0)
+        numpy_3d_data1 = torch.from_numpy(numpy_3d_data1).clone().unsqueeze(0)
 
         # 1 3D input + 1 3D target
         data_file2 = str(self.data_files2[index])
         numpy_3d_data2 = np.load(str(data_file2))
         numpy_3d_data2 = numpy_3d_data2.astype(np.float32)
-
-        numpy_3d_data2 = torch.Tensor(numpy_3d_data2)
-        numpy_3d_data2 = numpy_3d_data2.unsqueeze(0)
+        numpy_3d_data2 = torch.from_numpy(numpy_3d_data2).clone().unsqueeze(0)
 
         return numpy_3d_data1, numpy_3d_data2
