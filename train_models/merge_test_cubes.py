@@ -24,6 +24,14 @@ def merge_cubes_for_volume(base_name, cube_dir, output_dir, original_shape, cube
         if info:
             _, ix, iy, iz = info
             cube = np.load(os.path.join(cube_dir, fname))
+            # Check if the corresponding input cube is all zeros
+            input_fname = fname.replace('_output.npy', '_input.npy')
+            input_path = os.path.join(cube_dir, input_fname)
+            if os.path.exists(input_path):
+                input_cube = np.load(input_path)
+                if np.all(input_cube == 0):
+                    # Skip merging this output cube
+                    continue
             merged[
                 ix*cube_size:(ix+1)*cube_size,
                 iy*cube_size:(iy+1)*cube_size,
